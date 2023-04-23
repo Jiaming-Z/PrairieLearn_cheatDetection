@@ -68,6 +68,7 @@ router.get(
   '/:filename',
   asyncHandler(async (req, res, next) => {
     if (req.params.filename === logCsvFilename(res.locals)) {
+      console.log('=====RE.PARAMETERS.FILENAME!!!!!!======',req.params.filename);
       const cursor = await assessment.selectAssessmentInstanceLogCursor(
         res.locals.assessment_instance.id,
         false
@@ -77,6 +78,7 @@ router.get(
         header: true,
         columns: ['Time', 'Auth user', 'Event', 'Instructor question', 'Student question', 'Data'],
         transform(record) {
+          console.log('=========RECORD!!!!!!======',record);
           return [
             record.date_iso8601,
             record.auth_user_uid,
