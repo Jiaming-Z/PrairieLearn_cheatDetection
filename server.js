@@ -807,6 +807,28 @@ module.exports.initExpress = function () {
       require('./pages/instructorAssessmentQuestions/instructorAssessmentQuestions'),
     ]
   );
+  // redirect to cheat detection page 
+  app.use(
+    '/pl/course_instance/:course_instance_id/instructor/assessment/:assessment_id/cheat_detection',
+    [
+      function (req, res, next) {
+        res.locals.navSubPage = 'cheat_detection';
+        next();
+      },
+      require('./pages/instructorAssessmentCheatDetection/instructorAssessmentCheatDetection'),
+    ]
+  );
+  
+  app.use(
+    '/pl/course_instance/:course_instance_id/instructor/assessment/:assessment_id/cheat_detection_pair',
+    [
+      function (req, res, next) {
+        res.locals.navSubPage = 'cheat_detection_pair';
+        next();
+      },
+      require('./pages/instructorAssessmentCheatDetectionPair/instructorAssessmentCheatDetectionPair'),
+    ]
+  );
   app.use('/pl/course_instance/:course_instance_id/instructor/assessment/:assessment_id/groups', [
     function (req, res, next) {
       res.locals.navSubPage = 'groups';
